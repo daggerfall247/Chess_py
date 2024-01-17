@@ -3,6 +3,7 @@ run with > python main.py
 Controls:
 
 how to move : click on piece you want to move, then click on the desired destination
+promotion: the apps asks in the console for your input. Type "Q" for Queen, "B" for Bishop, "N" for Knight or "R" for Rook. Anything else will also result in a Queen
 reset match : press space
 
 ################################
