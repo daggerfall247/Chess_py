@@ -29,9 +29,46 @@ class Board:
             move.end.piece = move.start.piece
             move.start.piece = None
 
+            if move.end.piece == LightPiece.PAWN and move.end.coors[1] == 0:
+                self.promoteLight(move.end)
+
+            elif move.end.piece == DarkPiece.PAWN and move.end.coors[1] == 7:
+                self.promoteDark(move.end)
         else:
             print('cannot move to second field by game rules')
 
+    def promoteLight(self, field : Field) -> None:
+        piece : str = ""
+        while not piece:
+            piece = input("Which piece do you want?")
+            match piece:
+                case "Q":
+                    field.piece = LightPiece.QUEEN
+                case "R":
+                    field.piece = LightPiece.ROOK
+                case "B":
+                    field.piece = LightPiece.BISHOP
+                case "N":
+                    field.piece = LightPiece.KNIGHT
+                case _:
+                    field.piece = LightPiece.QUEEN
+
+        
+    def promoteDark(self, field : Field):
+        piece : str = ""
+        while not piece:
+            piece = input("Which piece do you want?")
+            match piece:
+                case "Q":
+                    field.piece = DarkPiece.QUEEN
+                case "R":
+                    field.piece = DarkPiece.ROOK
+                case "B":
+                    field.piece = DarkPiece.BISHOP
+                case "N":
+                    field.piece = DarkPiece.KNIGHT
+                case _:
+                    field.piece = DarkPiece.QUEEN
 
     def chooseStrategy(self, piece: Piece):
         match piece:
