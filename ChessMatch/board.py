@@ -25,7 +25,7 @@ class Board:
         
         self.chooseStrategy(move.start.piece)
 
-        if self.moveStrategy.isValid(self.fields, move.start):
+        if self.moveStrategy.isValid(self.fields, move):
             move.end.piece = move.start.piece
             move.start.piece = None
 
@@ -36,30 +36,30 @@ class Board:
     def chooseStrategy(self, piece: Piece):
         match piece:
             case DarkPiece.QUEEN:
-                self.moveStrategy = DarkQueenMoveStrategy()
+                self.moveStrategy = QueenMoveStrategy()
             case DarkPiece.KING:
-                self.moveStrategy = DarkKingMoveStrategy()
+                self.moveStrategy = KingMoveStrategy()
             case DarkPiece.KNIGHT:
-                self.moveStrategy = DarkKnightMoveStrategy()
+                self.moveStrategy = KnightMoveStrategy()
             case DarkPiece.BISHOP:
-                self.moveStrategy = DarkBishopMoveStrategy()
+                self.moveStrategy = BishopMoveStrategy()
             case DarkPiece.ROOK:
-                self.moveStrategy = DarkRookMoveStrategy()
+                self.moveStrategy = RookMoveStrategy()
             case DarkPiece.PAWN:
-                self.moveStrategy = DarkPawnMoveStrategy()
+                self.moveStrategy = PawnMoveStrategy()
 
             case LightPiece.QUEEN:
-                self.moveStrategy = LightQueenMoveStrategy()
+                self.moveStrategy = QueenMoveStrategy()
             case LightPiece.KING:
-                self.moveStrategy = LightKingMoveStrategy()
+                self.moveStrategy = KingMoveStrategy()
             case LightPiece.KNIGHT:
-                self.moveStrategy = LightKnightMoveStrategy()
+                self.moveStrategy = KnightMoveStrategy()
             case LightPiece.BISHOP:
-                self.moveStrategy = LightBishopMoveStrategy()
+                self.moveStrategy = BishopMoveStrategy()
             case LightPiece.ROOK:
-                self.moveStrategy = LightRookMoveStrategy()
+                self.moveStrategy = RookMoveStrategy()
             case LightPiece.PAWN:
-                self.moveStrategy = LightPawnMoveStrategy()
+                self.moveStrategy = PawnMoveStrategy()
 
     def getInitialBoard(self) -> list[list[Field]]:
         allFields : list[list[Field]] = [[Field(chr(97+file) + str(8-rank), (file, rank), None) for file in range(8)] for rank in range(8)]

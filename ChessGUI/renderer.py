@@ -5,14 +5,12 @@ import ChessMatch.pieces
 
 class Renderer:
 
-    def __init__(self, width, height, board):
+    def __init__(self, width, height):
 
         self.width : int = width
         self.height : int = height
 
         self.attachedSurface : pygame.Surface = None
-        
-        self.board : ChessMatch.board.Board = board
 
         self.screen : pygame.Surface = pygame.display.set_mode((self.width, self.height))
 
@@ -31,12 +29,12 @@ class Renderer:
 
         self.boardSurface : pygame.Surface = self.getBoardSurface()
 
-    def update(self):
+    def update(self, fields : list[list[ChessMatch.Field]]):
         self.screen.blit(self.boardSurface, (0,0))
         for y in range(8):
             for x in range(8):
-                if self.board.fields[y][x].piece:
-                    self.screen.blit(self.getSurface(self.board.fields[y][x].piece), (int(x*self.width/8), int(y*self.height/8)))
+                if fields[y][x].piece:
+                    self.screen.blit(self.getSurface(fields[y][x].piece), (int(x*self.width/8), int(y*self.height/8)))
 
         if self.attachedSurface:
             x, y = pygame.mouse.get_pos()
@@ -44,7 +42,7 @@ class Renderer:
 
     def attachToCursor(self, piece : ChessMatch.Piece) -> None:
         self.attachedSurface = self.getSurface(piece)
-        print(f'attached {type(piece)} to cursor!')
+        print(f'attached {piece} to cursor!')
 
     def removeAttachment(self) -> None:
         self.attachedSurface = None

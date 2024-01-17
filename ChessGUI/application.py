@@ -9,7 +9,7 @@ class Application:
         self.width = width
         self.height = height
         self.match = ChessMatch.match.Match()
-        self.renderer = Renderer(self.width, self.height, self.match.board)
+        self.renderer = Renderer(self.width, self.height)
 
         pygame.init()
         self.clock = pygame.time.Clock()
@@ -20,7 +20,7 @@ class Application:
         start : ChessMatch.field.Field = None
         while running:
         
-            self.renderer.update()
+            self.renderer.update(self.match.board.fields)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -42,6 +42,11 @@ class Application:
 
                     else:
                         print(f'there is no piece on field {field.id}')
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        print('space pressed!')
+                        self.match = ChessMatch.match.Match()
 
             pygame.display.flip()
             self.clock.tick(144)
